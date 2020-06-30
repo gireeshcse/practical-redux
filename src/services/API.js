@@ -1,25 +1,20 @@
-const http = require('http');
-const faker = require('faker');
+import sampleData from '../data/sampleData';
+import faker from 'faker';
 
-const port = process.env.port || 4000;
-
-http.createServer((req,res)=>{
-    res.writeHead(200,{'Content-Type': 'text/json'});
-    res.write(JSON.stringify(generateGameData(req.url)));
-    res.end();
-}).listen(port,()=>{
-    console.log('App running on port '+ port);
-})
 const Ranks = ["Commander","Major","Captain","Lietenant","Sergeant","Corporal","Private"];
 const Skills = ["Elite","Veteran","Regular"];
 const Roles = ["Soldier","MechWarrior","Vessel Pilot","Gunner"];
 const Genders = ["Male","Female","Other"];
 
-function generateGameData(url)
+function fetchSampleData()
 {
-    console.log(url);
-    if(url === '/pilots')
-    {
+    return Promise.resolve(sampleData);
+}
+
+function fetchPilots()
+{
+    return new Promise((resolve)=>{
+
         let pilots = [];
         for(let i=0;i < 100; i++)
         {
@@ -37,7 +32,9 @@ function generateGameData(url)
                 "lance": faker.random.number(10)
             })
         }
-        return pilots;
-    }
-    return "Hello World";
+        resolve(pilots);
+
+    });
 }
+
+export default {fetchPilots, Genders, Skills, Ranks, Roles};

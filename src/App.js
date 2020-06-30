@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import selectEntities from './redux/selectors';
+import Pilots from './components/Pilots';
 
 const mapStateToProps = (state,ownProps) => {
     return {
@@ -13,6 +14,9 @@ function App() {
   return (
     <div className="App">
       Practical Redux
+        <div className="container">
+          <Pilots />
+        </div>
     </div>
   );
 }
