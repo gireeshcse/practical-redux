@@ -8,9 +8,16 @@ export class Pilot extends Model{
             case 'PILOT_CREATE':
                 Pilot.create(action.payload.pilotDetails);
                 break;
+            case 'CREATE_PILOTS':
+                action.payload.forEach(pilot => {
+                    Pilot.create(pilot);
+                });
+                break;
             default:
                 return session.state;
         }
+        // return value is ignored
+        return session.state;
     }
 }
 Pilot.modelName = "Pilot";

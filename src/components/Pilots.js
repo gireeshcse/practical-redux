@@ -1,22 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
-import API from '../services/API';
 import Pilot from './Pilot';
 
-function Pilots()
+function Pilots(props)
 {
-    const [Pilots, setPilots] = useState([]);
-
-    if (Pilots.length === 0)
-    {
-        API.fetchPilots().then((data)=>{
-            setPilots(data);
-        });
-    }
-
     function renderPilots()
     {
-        return Pilots.map((pilot) => {
+        return props.pilots.map((pilot) => {
             return <Pilot key={pilot.id} {...pilot} />
         })
     }
